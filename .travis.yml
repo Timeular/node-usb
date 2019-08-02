@@ -15,7 +15,7 @@ addons:
 env:
   global:
   - PREBUILD_TARGETS="6.0.0 8.0.0 10.0.0 11.0.0 12.0.0"
-  - PREBUILD_ELECTRON_TARGETS="3.0.0 4.0.0 4.0.4 5.0.0"
+  - PREBUILD_ELECTRON_TARGETS="3.0.0 4.0.0 4.0.4 5.0.0 6.0.0"
   matrix:
   - ARCH="x64"
   - ARCH="ia32"
@@ -54,7 +54,7 @@ deploy:
   provider: releases
   api_key:
     # tm-rampart personal access token
-    secure: "ivZseBMz+0bsYcCFAXJ82mJIhmsRj4UN32bcggg+8ZYl8xzgC2P/kMGhPe8+4fDxo+lyxf4aJDKWozE0perMQKjjAOdri8MH2ufqGFRfkF0A3gJnOBcWMA6AP3ef0TE/HNF+NMluBCV+/VFPdsvZN08rnPauWzSBGy9SkeIJhY8="
+    secure: $prebuild_upload
   file_glob: true
   file: prebuilds/*
   skip_cleanup: true
