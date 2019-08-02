@@ -13,9 +13,6 @@ addons:
     - libudev-dev
 
 env:
-  global:
-  - PREBUILD_TARGETS="6.0.0 8.0.0 10.0.0 11.0.0 12.0.0"
-  - PREBUILD_ELECTRON_TARGETS="3.0.0 4.0.0 4.0.4 5.0.0 6.0.0"
   matrix:
   - ARCH="x64"
   - ARCH="ia32"
@@ -42,22 +39,12 @@ install:
 - npm install
 
 script:
-- |
-  for target in $PREBUILD_TARGETS; do
-    npm run prebuild -- -t $target --arch=$ARCH
-  done
-
-  for target in $PREBUILD_ELECTRON_TARGETS; do
-    npm run prebuild -- -t $target --arch=$ARCH -r electron
-  done
-deploy:
-  provider: releases
-  api_key:
-    # tm-rampart personal access token
-    secure: $prebuild_upload
-  file_glob: true
-  file: prebuilds/*
-  skip_cleanup: true
-  overwrite: true
-  on:
-    tags: true
+  - PUBLISH_BINARY=false
+  # if we are building a tag then publish
+  - if [[ $TRAVIS_BRANCH == `git describe --tags --always HEAD` ]]; then PUBLISH_BINARY=true; fi;
+  - >
+    if [ "$PUBLISH_BINARY" == true ]; then
+      npm install -g prebuild
+      npm run prebuild -- -t 6.14.4 -t 8.12.0 -t 9.11.2 -t 10.16.1 -t 11.15.0 -t 12.7.0 -r node --upload $prebuild_upload
+      npm run prebuild -- -t 2.0.0 -t 3.0.0 -t 4.0.4 -t 5.0.0 -t 6.0.0 -r electron --upload $prebuild_upload
+    fi
