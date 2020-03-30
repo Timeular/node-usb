@@ -37,9 +37,9 @@
     "valgrind": "coffee -c test/usb.coffee; valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/mocha/bin/_mocha -R spec"
   },
   "dependencies": {
-    "bindings": "^1.4.0",
-    "nan": "2.13.2",
-    "prebuild-install": "^5.2.4"
+    "bindings": "^1.5.0",
+    "nan": "^2.14.0",
+    "prebuild-install": "^5.3.3"
   },
   "resolutions": {
     "**/nan": "2.13.2"
@@ -47,7 +47,7 @@
   "devDependencies": {
     "coffeescript": "~2.4.1",
     "mocha": "~6.1.4",
-    "prebuild": "^8.2.1"
+    "prebuild": "10.0.0"
   },
   "license": "MIT"
 }
