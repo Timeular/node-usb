@@ -37,10 +37,7 @@
     "valgrind": "coffee -c test/usb.coffee; valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/mocha/bin/_mocha -R spec"
   },
   "dependencies": {
-    "nan": "^2.14.0"
-  },
-  "resolutions": {
-    "**/nan": "2.13.2"
+    "node-addon-api": "3.0.2"
   },
   "devDependencies": {
     "coffeescript": "~2.4.1",
