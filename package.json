@@ -30,8 +30,8 @@
     "url": "https://github.com/Timeular/node-usb.git"
   },
   "scripts": {
-    "install": "npx prebuild-install --verbose || node-gyp rebuild",
-    "prebuild": "prebuild --force --strip --verbose",
+    "install": "npx prebuild-install --runtime napi || node-gyp rebuild",
+    "prebuild": "prebuild --runtime napi -t 4 --force --strip",
     "test": "mocha --require coffeescript/register --grep Module test/*",
     "full-test": "mocha --require coffeescript/register test/*",
     "valgrind": "coffee -c test/usb.coffee; valgrind --leak-check=full --show-possibly-lost=no node --expose-gc --trace-gc node_modules/mocha/bin/_mocha -R spec"
@@ -44,5 +44,8 @@
     "mocha": "~6.1.4",
     "prebuild": "10.0.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "binary": {
+    "napi_versions": [4]
+  }
 }
